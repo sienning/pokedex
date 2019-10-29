@@ -23,11 +23,10 @@ class General extends Component{
     async componentDidMount(){
         this.setState({ isLoading : true })
         try {
-        const res = await fetch(`https://pokeapi.co/api/v2/pokemon/ditto/`);
-        console.log(res);
-
+        const res = await fetch(`https://pokeapi.co/api/v2/pokemon/1/`);
         const data = await res.json();
         this.setState({ data: data, isLoading: false });
+
         console.log(data);
 
         } catch (err){
@@ -41,20 +40,14 @@ class General extends Component{
     render(){
         const { isLoading, data } = this.state;
         return ( 
-        <div className="App">
-            <Menu attached='top'>
-                <Menu.Item name='pokémon'/>
-                    <Menu.Menu position='right'>
-                    <Filtre handleSubmit={this.handleSubmit} value={this.state.value}></Filtre>
-                    </Menu.Menu>
-                </Menu>
+        <div>
+            <Filtre></Filtre>
                 <Container text>
                     <h1>Pokédex</h1>
-                    {/* {isLoading ? <LoaderDiv /> : <p>{data}</p>} */}
-                    <Card.Group>
-                        <Pokemon fluid></Pokemon>
+                    {isLoading ? <LoaderDiv /> : <p>{data.name}</p>}
+                    <Card.Group centered>
+                        <Pokemon nom={data.name} fluid raised></Pokemon>
                     </Card.Group>
-                    
                 </Container>
             
         </div>

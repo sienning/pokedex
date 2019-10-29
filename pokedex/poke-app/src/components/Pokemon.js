@@ -1,22 +1,25 @@
-import React, { Component } from 'react';
-import LoaderDiv from './LoaderDiv';
-import Filtre from './Filtre';
-import { Card, Icon } from 'semantic-ui-react';
+import React from 'react';
+import { Card, Icon, Image } from 'semantic-ui-react';
 
-
-
-class Pokemon extends Component{
-    render(){
-        return ( 
+const Pokemon = ({ nom, image, type, statut }) => { 
+    return ( 
         <div className="pokemon">
-            <Card
-                image='https://react.semantic-ui.com/images/avatar/large/elliot.jpg'
-                header='Elliot Baker'
-                meta='Friend'
-                description='Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his cat.'
-            />  
+            <Card href='#card-example-link-card'>
+                <Image src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" wrapped ui={false} />
+                <Card.Content>
+                    <Card.Header>{nom}</Card.Header>
+                    <Card.Meta extra>
+                        <span>Type</span>
+                    </Card.Meta>
+                </Card.Content>
+                <Card.Content extra>
+                    <div>
+                        <Icon name='user'/>
+                        22 Friends
+                    </div>
+                </Card.Content>
+            </Card>
         </div>
-        );
-    }
+    );
 }
 export default Pokemon;
