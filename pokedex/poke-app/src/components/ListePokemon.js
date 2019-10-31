@@ -6,12 +6,12 @@ import { Container, Card } from 'semantic-ui-react';
 
 const ListeAppart = ({ pokemons }) => {
     return (
-        <div>
+        <Card.Group  doubling itemsPerRow={3} stackable >
             {
                 pokemons.map((i, index) =>
-                    <Card.Group centered key={'i' + index}><Pokemon nom={i.nom} url={i.url}></Pokemon></Card.Group>
+                    <Pokemon center key={'i' + index} nom={i.nom} url={i.url}></Pokemon>
                 )}
-        </div>
+        </Card.Group>
     );
 };
 

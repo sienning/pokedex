@@ -43,17 +43,15 @@ class General extends Component {
     render() {
         const { isLoading, data } = this.state;
         return (
-            <div>
+            <Container>
                 <Router>
                     <h1>Pokédex</h1>
                     <p>Tout ce que vous voulez savoir sur les Pokémons !</p>
                     <Filtre handleSubmit={this.handleSubmit} value={this.state.value}></Filtre>
 
-                        <Container text>
-
-
+                        <div>
                             {isLoading ? <LoaderDiv></LoaderDiv> : <ListePokemon pokemons={data.results} fluid raised></ListePokemon>}
-                        </Container>
+                        </div>
 
                 
                     <Switch>
@@ -65,7 +63,7 @@ class General extends Component {
                 </Router>
 
 
-            </div>
+            </Container>
         );
     }
 }
