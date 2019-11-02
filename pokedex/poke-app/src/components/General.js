@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import LoaderDiv from './LoaderDiv';
 import Filtre from './Filtre';
-import { Container, Card } from 'semantic-ui-react';
-// import Pokemon from './Pokemon';
+import { Container, Button } from 'semantic-ui-react';
 import ListePokemon from './ListePokemon';
 import PokeDetails from './PokeDetails';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 class General extends Component {
     state = {
@@ -15,11 +13,10 @@ class General extends Component {
         value: '',
     }
 
-
     async componentDidMount() {
         this.setState({ isLoading: true })
         try {
-            const res = await fetch(`https://pokeapi.co/api/v2/pokemon/`);
+            const res = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=964.`);
             const pokedata = await res.json();
             this.setState({ data: pokedata, isLoading: false });
 
@@ -39,21 +36,29 @@ class General extends Component {
     }
 
 
-
     render() {
         const { isLoading, data } = this.state;
+        let filtrePokemon = [];
+        if (!isLoading) {
+
+            filtrePokemon = data.results.filter(pokemon =>
+                pokemon.name.toLocaleLowerCase().includes(this.state.value.toLocaleLowerCase())
+            );
+
+        }
         return (
             <Container>
                 <Router>
+                    <Button basic color="yellow" icon='arrow up' onclick="topFunction()" id="myBtn" title="Go to top" />
+
                     <h1>Pokédex</h1>
                     <p>Tout ce que vous voulez savoir sur les Pokémons !</p>
                     <Filtre handleSubmit={this.handleSubmit} value={this.state.value}></Filtre>
+                    <div>
+                        {isLoading ? <LoaderDiv></LoaderDiv> : <ListePokemon pokemons={filtrePokemon} fluid raised></ListePokemon>}
+                    </div>
 
-                        <div>
-                            {isLoading ? <LoaderDiv></LoaderDiv> : <ListePokemon pokemons={data.results} fluid raised></ListePokemon>}
-                        </div>
 
-                
                     <Switch>
                         <Route path="/pokemon">
                             <PokeDetails></PokeDetails>

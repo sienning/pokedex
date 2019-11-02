@@ -15,19 +15,15 @@ class App extends Component {
 
         <Router>
           <div>
-            <Menu attached='top'>
+            <Menu className="navbar" attached='top'>
               <Link to="/">
                 <Menu.Item name='pokedex' />
               </Link>
             </Menu>
 
             <Switch>
-              <Route exact path="/">
-                <General></General>
-              </Route>
-              <Route path="/pokmemon">
-                <PokeDetails></PokeDetails>
-              </Route>
+              <Route exact path="/" component={General} />
+              <Route path="/:PokemonName" component={PokeDetails} />
             </Switch>
           </div>
 

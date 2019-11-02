@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Card, Image, Placeholder } from 'semantic-ui-react';
-import LoaderDiv from './LoaderDiv';
 
 class Pokemon extends Component {
 
@@ -8,8 +7,6 @@ class Pokemon extends Component {
         data: [],
         isLoading: true,
     }
-
-    // const Pokemon = ({ nom, url }) => {
 
     async componentDidMount() {
         this.setState({ isLoading: true })
@@ -29,12 +26,14 @@ class Pokemon extends Component {
     render() {
         const { isLoading, data } = this.state;
         return (
-            <Card href="">
+            <Card className="poke-card" href={data.name}>
                 {isLoading ? <Placeholder><Placeholder.Image square /></Placeholder> : <Image src={data.sprites.front_default} wrapped ui={false} />}
                 <Card.Content>
-                    {isLoading ? <LoaderDiv></LoaderDiv> : <Card.Header>{data.name}</Card.Header>}
+                    {isLoading ? <Placeholder.Line /> : <Card.Header>{data.name}</Card.Header>}
                 </Card.Content>
             </Card>
+
+
         );
     }
 
