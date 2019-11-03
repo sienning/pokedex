@@ -1,16 +1,22 @@
 import React from 'react';
 import { Image, List, Divider } from 'semantic-ui-react';
+import '../Details.css';
 
-const Details = ({ name, type, urlImage, weight, height, speed, specialDefense, specialAttack, defense, attack, hp }) => {
+const Details = ({ name, types, urlImage, weight, height, speed, specialDefense, specialAttack, defense, attack, hp, abilities }) => {
     return (
         <div className="App-header" >
             <Image size='medium' src={urlImage} wrapped ui={false} />
             <h1>{name.toUpperCase()}</h1>
             <div>
+
                 <Divider horizontal inverted>Type</Divider>
-                <p>Hello</p>
-            </div>
-            <div>
+                <div>
+                    {
+                        types.map((i, index) =>
+                            <div key={'i' + index} className={i.type.name}></div>
+                        )
+                    }
+                </div>
                 <Divider horizontal inverted>Poids</Divider>
                 <p>{weight} kg</p>
                 <Divider horizontal inverted>Taille</Divider>
@@ -29,9 +35,11 @@ const Details = ({ name, type, urlImage, weight, height, speed, specialDefense, 
                 <div>
                     <Divider horizontal inverted>Capacités</Divider>
                     <List>
-                        <List.Item>{hp}</List.Item>
-                        <List.Item>{speed}</List.Item>
-                        <List.Item>{attack}</List.Item>
+                        {
+                            abilities.map((i, index) =>
+                                <List.Item key={'i' + index}>{i.ability.name}</List.Item>
+                            )
+                        }
                     </List>
 
                 </div>
